@@ -1,0 +1,60 @@
+.TaskItem p {
+  margin: 0;
+  font-size: 12px;
+}
+.TaskItem input {
+  outline: 0;
+  border: 0;
+  background-color: var(--primary-color);
+  border: 1px solid rgba(0, 0, 0, 0.305);
+}
+.TaskItem .btn-add-task {
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem;
+  border: 1px solid black;
+  margin-bottom: 1rem;
+}
+.TaskItem .list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.TaskItem .list .item {
+  padding: 0.5rem;
+  border: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+}
+.TaskItem .list .item .wrap-left {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.TaskItem .list .item .wrap-left .title {
+  font-size: 22px;
+}
+.TaskItem .list .item .wrap-left .deadline p {
+  font-size: 10px;
+}
+.TaskItem .list .item .wrap-left .input-title {
+  width: 12rem;
+  font-size: 22px;
+}
+.TaskItem .list .item .wrap-left .input-deadline {
+  width: 10rem;
+  border: 0;
+  font-size: 12px;
+}
+.TaskItem .list .item .wrap-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.TaskItem .list .item .wrap-right .state-done {
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem;
+  border: 1px solid black;
+  width: 5rem;
+}

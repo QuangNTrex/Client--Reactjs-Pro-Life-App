@@ -1,0 +1,40 @@
+.GroupClassify {
+  width: 100%;
+  max-width: 600px;
+}
+.GroupClassify .header {
+  margin-left: -1rem;
+  margin-bottom: 1rem;
+}
+.GroupClassify .list {
+  width: 100%;
+  display: flex;
+  gap: 2rem;
+  overflow: auto;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+.GroupClassify .list .type {
+  padding: 0.5rem;
+  width: 5rem;
+  min-width: 5rem;
+  height: 5rem;
+  background-color: var(--icon-color);
+  border-radius: 1rem;
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.GroupClassify .list .type p {
+  color: white;
+  text-align: center;
+  margin: 0;
+  font-size: 12px;
+}
+.GroupClassify .list .type i {
+  font-size: 28px;
+  color: white;
+}

@@ -1,0 +1,29 @@
+.Product {
+  padding: 0.5rem;
+  border: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.Product .wrap-right {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.Product .wrap-right .wrap-right-top {
+  display: flex;
+  gap: 0.5rem;
+}
+.Product .wrap-right .wrap-right-top .wrap-info {
+  display: flex;
+  gap: 4px;
+}
+.Product .wrap-right .wrap-right-top .wrap-info.price {
+  width: 5.5rem;
+}
+.Product .wrap-right .wrap-right-top .wrap-info.quantity {
+  width: 3rem;
+}
+.Product .wrap-right .wrap-right-top .wrap-info.total {
+  width: 4rem;
+}

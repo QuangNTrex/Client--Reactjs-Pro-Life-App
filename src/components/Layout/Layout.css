@@ -1,0 +1,6 @@
+.Layout {
+  background-color: var(--primary-color);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}

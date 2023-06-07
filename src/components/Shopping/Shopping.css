@@ -1,0 +1,47 @@
+.Shopping__btn-add-bill {
+  display: flex;
+  justify-content: flex-end;
+}
+.Shopping__btn-add-bill .container {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.5rem;
+  border: 1px solid var(--info-color);
+  width: fit-content;
+  margin: 0;
+}
+.Shopping__btn-add-bill .container * {
+  margin: 0;
+}
+.Shopping__Lists {
+  margin-top: 2rem;
+}
+.Shopping__Lists .wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.Shopping__Lists .wrap .bill {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid black;
+  padding: 0.5rem;
+}
+.Shopping__Lists .wrap .bill .wrap-left .date {
+  font-size: 10px;
+  margin: 0;
+}
+.Shopping__Lists .wrap .bill .wrap-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+.Shopping__Lists .wrap .bill .wrap-right .total-price p {
+  margin: 0;
+}
+.Shopping__Lists .wrap .bill .wrap-right .state-pay p {
+  margin: 0;
+  font-size: 13px;
+}

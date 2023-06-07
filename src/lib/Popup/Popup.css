@@ -1,0 +1,77 @@
+.Popup {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.Popup p {
+  margin: 0;
+}
+.Popup .container {
+  background-color: var(--primary-color);
+  height: 80%;
+  overflow: auto;
+}
+.Popup .btn-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+.Popup .btn-close {
+  color: white;
+  background-color: white;
+}
+.Popup .form {
+  width: 100%;
+  padding: 1rem;
+  padding-top: 3rem;
+}
+.Popup .form .each-input .checkboxs {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 0.8rem;
+}
+.Popup .form .each-input .checkboxs .checkbox {
+  gap: 0.5rem;
+  display: flex;
+}
+.Popup .form .each-input {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+.Popup .form .each-input label {
+  color: var(--info-color);
+  font-size: 20px;
+}
+.Popup .form .each-input .input {
+  width: 50%;
+  font-size: 1rem;
+}
+.Popup .gr-btn {
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+.Popup .gr-btn .btn {
+  padding: 0.5rem;
+  color: white;
+}
+
+.Popup .gr-btn .btn-cancel {
+  background-color: brown;
+}
+.Popup .gr-btn .btn-submit {
+  background-color: green;
+}

@@ -1,0 +1,8 @@
+.Home {
+  padding: 1rem;
+}
+.Home__classify {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}

@@ -1,0 +1,91 @@
+.Tasks {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.Tasks p {
+  margin: 0;
+  font-size: 12px;
+}
+.Tasks .btn-add-task {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+.Tasks .list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  height: 100%;
+}
+.Tasks .list .item {
+  padding: 0.5rem;
+  border: 1px solid black;
+
+  display: flex;
+  justify-content: space-between;
+}
+.Tasks .list .item .wrap-left {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.Tasks .list .item .wrap-left .title {
+  font-size: 24px;
+  margin-bottom: 0.5rem;
+}
+.Tasks .list .item .wrap-left .deadline {
+  display: flex;
+  gap: 0.5rem;
+}
+.Tasks .list .item .wrap-left .repeat {
+  display: flex;
+  gap: 4px;
+}
+.Tasks .list .item .wrap-left .repeat .week {
+  display: flex;
+}
+.Tasks .list .item .wrap-left .input-title {
+  font-size: 24px;
+  width: 14rem;
+  outline: 0;
+  border: 1px solid rgba(0, 0, 0, 0.271);
+  background-color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+.Tasks .list .item .wrap-left .input-deadline {
+  font-size: 12px;
+  width: 10rem;
+  outline: 0;
+  border: 1px solid rgba(0, 0, 0, 0.271);
+  background-color: var(--primary-color);
+}
+.Tasks .list .item .wrap-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.Tasks .list .item .wrap-right .progress {
+  background-color: var(--primary-color);
+  display: flex;
+  gap: 0.5rem;
+}
+.Tasks .list .item .wrap-right .state-done {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.Tasks .list .item .wrap-right .state-done p {
+  font-size: 1rem;
+}
+.Tasks .list .item .wrap-right .state-done .btn-destroy {
+  display: flex;
+  justify-content: center;
+  width: 3rem;
+  padding: 2px;
+  border: 1px solid rgba(0, 0, 0, 0.361);
+}

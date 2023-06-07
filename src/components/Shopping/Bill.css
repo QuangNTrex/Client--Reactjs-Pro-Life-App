@@ -1,0 +1,76 @@
+.Bill {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: auto;
+}
+.Bill .add-product {
+  width: 100%;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+}
+.Bill p {
+  margin: 0;
+  font-size: 14px;
+}
+.Bill .list {
+  padding-top: 2rem;
+  padding-bottom: 9rem;
+  padding-right: 0.5rem;
+  margin-right: -0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  height: 100%;
+  overflow: auto;
+}
+.Bill input {
+  border: 0;
+  outline: 0;
+  background-color: var(--primary-color);
+  font-size: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.213);
+}
+.Bill .Product .input-title {
+  width: 50%;
+}
+.Bill .Product .input-price {
+  width: 4rem;
+}
+.Bill .input-quantity {
+  width: 2.2rem;
+}
+.Bill__bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  padding: 1rem;
+
+  background-color: var(--primary-color);
+}
+.Bill__bottom .border-only {
+  padding: 0.5rem;
+  border: 1px solid black;
+}
+.Bill__bottom .total-price {
+  display: flex;
+  justify-content: space-between;
+}
+.Bill__bottom .gr-btn {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 1rem;
+}
+.Bill__bottom .gr-btn .btn-pay {
+  border: 0;
+  outline: 0;
+  background-color: var(--primary-color);
+  padding: 4px 1rem;
+  border: 1px solid black;
+}

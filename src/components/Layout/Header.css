@@ -1,0 +1,14 @@
+.Header {
+  padding: var(--section-padding);
+  border-bottom: 1px solid black;
+}
+.Header__container {
+  display: flex;
+  justify-content: space-between;
+}
+.Header__container * {
+  color: var(--info-color);
+}
+.Header h3 {
+  margin: 0;
+}
