@@ -4,8 +4,9 @@ import "./Tasks.css";
 import { TaskActions } from "../../store/task";
 import { useState } from "react";
 import Popup from "../../lib/Popup/Popup";
-import { upFirstStr } from "../../utils/utils";
+import { checkBorder, checkDeadline, upFirstStr } from "../../utils/utils";
 import { useNavigate } from "react-router-dom";
+import { DataActions } from "../../store/data";
 const listWeek = [
   "monday",
   "tuesday",
@@ -16,7 +17,7 @@ const listWeek = [
   "sunday",
 ];
 const Tasks = () => {
-  const tasks = useSelector((state) => state.task.tasks);
+  const tasks = useSelector((state) => state.data.task);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showPU, setShowPU] = useState(false);
@@ -27,15 +28,21 @@ const Tasks = () => {
     const title = data.title;
     const deadline = Date.parse(data.deadline);
     const repeat = data.repeat;
-    dispatch(TaskActions.addTask({ title, deadline, repeat }));
+    dispatch(
+      DataActions.createList({
+        type: "task",
+        list: { title, deadline, repeat },
+      })
+    );
     setShowPU(false);
   };
-  const inputChangeHandler = (taskId, data) => {
-    dispatch(TaskActions.updateTask({ task: data, taskId }));
+  const inputChangeHandler = (listId, data) => {
+    dispatch(DataActions.updateList({ type: "task", list: data, listId }));
   };
-  const deleteTaskHandler = (taskId, title) => {
+  const deleteTaskHandler = (listId, title) => {
     const prom = prompt(`Press "${title || ""}" to delete the task`);
-    if (prom === (title || "")) dispatch(TaskActions.deleteTask({ taskId }));
+    if (prom === (title || ""))
+      dispatch(DataActions.deleteList({ type: "task", listId }));
   };
   return (
     <div className="Tasks">
@@ -80,7 +87,9 @@ const Tasks = () => {
         {tasks.map((e, i) => (
           <div
             key={e.createdAt.toString()}
-            className="item"
+            className={`item ${
+              e.done ? "border-green" : checkBorder(e.deadline)
+            }`}
             onClick={() => {
               if (editMode) return setIndexActive(i);
               navigate(`/tasks/${e.createdAt}`);
@@ -92,9 +101,7 @@ const Tasks = () => {
                 <div className="deadline">
                   <p className="">Deadline: </p>
                   <p className="deadline-time">
-                    {new Date(e.deadline - 7 * 3600 * 1000).toLocaleString(
-                      "en-US"
-                    )}
+                    {new Date(e.deadline ? e.deadline : "").toLocaleString()}
                   </p>
                 </div>
                 <div className="repeat">
@@ -124,7 +131,10 @@ const Tasks = () => {
                   <input
                     type="datetime-local"
                     className="input-deadline"
-                    value={new Date(e.deadline).toISOString().slice(0, -5)}
+                    value={
+                      e.deadline &&
+                      new Date(e.deadline).toISOString().slice(0, -5)
+                    }
                     onChange={(event) => {
                       inputChangeHandler(e.createdAt.toString(), {
                         deadline: Date.parse(event.target.value),
@@ -146,9 +156,10 @@ const Tasks = () => {
                           repeat[week] = true;
                           if (!event.target.checked) delete repeat[week];
                           dispatch(
-                            TaskActions.updateTask({
-                              task: { repeat },
-                              taskId: e.createdAt.toString(),
+                            DataActions.updateList({
+                              type: "task",
+                              list: { repeat },
+                              listId: e.createdAt.toString(),
                             })
                           );
                         }}

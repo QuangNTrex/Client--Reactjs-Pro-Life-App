@@ -14,15 +14,15 @@ const NaviBar = () => {
   if (pathName === "") return <div></div>;
   return (
     <div className="NaviBar">
-      <NavLink className="link" to="/">
+      <NavLink className="link noselect" to="/">
         Home
       </NavLink>
       {arrPath.map((e) => {
         path += "/" + e;
         return (
           <div className="wrapper" key={Math.random().toString()}>
-            <i className="bi bi-chevron-left"></i>
-            <NavLink className="link" to={path}>
+            <i className="bi bi-chevron-left noselect"></i>
+            <NavLink className="link noselect" to={path}>
               {uppercaseFirst(e)}
             </NavLink>
           </div>

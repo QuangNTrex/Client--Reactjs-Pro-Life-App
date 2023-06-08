@@ -19,7 +19,20 @@ const Header = () => {
             ProLife
           </h3>
         </div>
-        <div className="abc">abc</div>
+        <div
+          className="abc noselect"
+          onClick={() => {
+            const data = {
+              bill: JSON.parse(localStorage.getItem("bills")) || [],
+              lend: JSON.parse(localStorage.getItem("lends")) || [],
+              task: JSON.parse(localStorage.getItem("tasks")) || [],
+            };
+            console.log(JSON.stringify(data));
+            navigator.clipboard.writeText(JSON.stringify(data));
+          }}
+        >
+          abc
+        </div>
       </div>
     </div>
   );

@@ -35,3 +35,12 @@ i {
 .hidden {
   display: none;
 }
+.border-red {
+  border: 1px solid red !important;
+}
+.border-yellow {
+  border: 1px solid rgb(179, 179, 0) !important;
+}
+.border-green {
+  border: 1px solid green !important;
+}

@@ -5,6 +5,8 @@ import Popup from "../../lib/Popup/Popup";
 import { useDispatch, useSelector } from "react-redux";
 import { LendActions } from "../../store/lend";
 import { useNavigate } from "react-router-dom";
+import { DataActions } from "../../store/data";
+import { checkBorder } from "../../utils/utils";
 
 const Lend = () => {
   const navigate = useNavigate();
@@ -15,10 +17,13 @@ const Lend = () => {
 
   const submitHandler = (data) => {
     dispatch(
-      LendActions.addLend({
-        fullName: data.fullName,
-        title: data.title,
-        estimateDate: Date.parse(data.estimateDate),
+      DataActions.createList({
+        type: "lend",
+        list: {
+          fullName: data.fullName,
+          title: data.title,
+          estimateDate: Date.parse(data.estimateDate),
+        },
       })
     );
   };
@@ -47,7 +52,9 @@ const Lend = () => {
         {lends.length === 0 && <p>Not have lend, congratuation!</p>}
         {lends.map((e) => (
           <div
-            className="lend"
+            className={`lend ${
+              e.pay ? "border-green" : checkBorder(e.estimateDate)
+            }`}
             key={e.createdAt.toString()}
             onClick={() => navigate(`/lend/${e.createdAt}`)}
           >
@@ -59,7 +66,9 @@ const Lend = () => {
               </div>
               <div className="wrap-date">
                 <p>Estimate</p>
-                <p>{new Date(e.estimateDate).toLocaleDateString("en-US")}</p>
+                <p>
+                  {new Date(e.estimateDate || NaN).toLocaleDateString("en-US")}
+                </p>
               </div>
             </div>
             <div className="wrap-right">

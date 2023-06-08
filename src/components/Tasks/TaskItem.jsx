@@ -1,21 +1,23 @@
 import { useParams } from "react-router-dom";
 import "./TaskItem.css";
 import { useDispatch, useSelector } from "react-redux";
-import { TaskActions } from "../../store/task";
 import { useEffect, useState } from "react";
+import { DataActions } from "../../store/data";
 
 const TaskItem = () => {
   const [indexActive, setIndexActive] = useState(-1);
   const dispatch = useDispatch();
   const param = useParams();
-  const currentTask = useSelector((state) => state.task.tasks).filter(
+  const currentTask = useSelector((state) => state.data.task).filter(
     (task) => task.createdAt == param.id
   )[0];
-  const inputChangeHandler = (taskItemId, data) => {
+  const inputChangeHandler = (itemId, data) => {
+    console.log(itemId, data);
     dispatch(
-      TaskActions.updateListTask({
-        taskId: param.id,
-        taskItemId,
+      DataActions.updateItem({
+        type: "task",
+        listId: param.id,
+        itemId,
         item: data,
       })
     );
@@ -25,9 +27,10 @@ const TaskItem = () => {
       const item = currentTask.list[i];
       if (!item.title && indexActive !== i) {
         dispatch(
-          TaskActions.deleteTaskItem({
-            taskId: param.id,
-            taskItemId: item.createdAt.toString(),
+          DataActions.deleteItem({
+            type: "task",
+            listId: param.id,
+            itemId: item.createdAt.toString(),
           })
         );
         return;
@@ -38,7 +41,10 @@ const TaskItem = () => {
     <div className="TaskItem">
       <div
         className="btn-add-task"
-        onClick={() => dispatch(TaskActions.addListTask({ taskId: param.id }))}
+        onClick={() => {
+          setIndexActive(0);
+          dispatch(DataActions.createItem({ listId: param.id, type: "task" }));
+        }}
       >
         <i className="bi bi-plus-lg"></i>
       </div>
@@ -57,6 +63,7 @@ const TaskItem = () => {
               )}
               {i === indexActive && (
                 <input
+                  autoFocus
                   placeholder="Untitled"
                   className="input-title"
                   value={item.title}

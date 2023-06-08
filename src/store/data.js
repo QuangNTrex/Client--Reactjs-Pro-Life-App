@@ -3,6 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const nameList = {
   bill: "bill",
   lend: "lend",
+  task: "task",
+  plan: "plan",
 };
 const updateFn = {
   bill: (data) => {
@@ -27,6 +29,31 @@ const updateFn = {
     });
 
     localStorage.setItem("lends", JSON.stringify(lends));
+    return lends;
+  },
+  task: (data) => {
+    const tasks = [...data];
+    tasks.forEach((task) => {
+      const totalDone = task.list.reduce(
+        (total, event) => total + event.done,
+        0
+      );
+      task.done = totalDone === task.list.length && totalDone !== 0;
+    });
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    return tasks;
+  },
+  plan: (data) => {
+    const plans = [...data];
+    plans.forEach((plan) => {
+      const totalDone = plan.list.reduce(
+        (total, event) => total + event.done,
+        0
+      );
+      plan.done = totalDone === plan.list.length && totalDone !== 0;
+    });
+    localStorage.setItem("plans", JSON.stringify(plans));
+    return plans;
   },
 };
 const getInitList = (type, list) => {
@@ -50,6 +77,28 @@ const getInitList = (type, list) => {
       createdAt: Date.now(),
       updatedAt: Date.now(),
     };
+  if (nameList.task === type)
+    return {
+      title: list.title,
+      deadline: list.deadline,
+      repeat: list.repeat,
+      done: false,
+      list: [],
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+    };
+  if (nameList.plan === type)
+    return {
+      title: list.title || "",
+      startAt: list.startAt || NaN,
+      endAt: list.endAt || NaN,
+      list: [],
+      note: list.note || "",
+      done: false,
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+    };
+
   console.log("has error");
 };
 
@@ -57,8 +106,8 @@ const getInitItem = (type) => {
   if (nameList.bill === type)
     return {
       title: "",
-      price: undefined,
-      quantity: undefined,
+      price: "",
+      quantity: "",
       updatedAt: Date.now(),
       createdAt: Date.now(),
     };
@@ -70,10 +119,32 @@ const getInitItem = (type) => {
       title: "",
       estimateDate: NaN,
     };
+  if (nameList.task === type)
+    return {
+      title: "",
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+      deadline: NaN,
+      done: false,
+    };
+  if (nameList.plan === type)
+    return {
+      title: "",
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+      startAt: NaN,
+      endAt: NaN,
+      note: "",
+      done: false,
+    };
+  console.log("has error");
 };
+
 const initialState = {
   bill: JSON.parse(localStorage.getItem("bills")) || [],
-  lends: JSON.parse(localStorage.getItem("lends")) || [],
+  lend: JSON.parse(localStorage.getItem("lends")) || [],
+  task: JSON.parse(localStorage.getItem("tasks")) || [],
+  plan: JSON.parse(localStorage.getItem("plans")) || [],
 };
 
 const DataSlice = createSlice({
@@ -131,8 +202,6 @@ const DataSlice = createSlice({
               e.list[i] = { ...e.list[i], ...item };
             }
           }
-
-          console.log({ ...e });
         }
       });
       state[type] = updateFn[type](state[type]);

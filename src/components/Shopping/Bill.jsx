@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import "./Bill.css";
 import { useDispatch, useSelector } from "react-redux";
-import { BillActions } from "../../store/bill";
 import { useEffect, useState } from "react";
 import Product from "./Product";
 import { compactPrice } from "../../utils/utils";
@@ -10,7 +9,8 @@ import { DataActions } from "../../store/data";
 const Bill = () => {
   // data
   const [indexActive, setIndexActive] = useState(-1);
-
+  const [inputPrice, setInputPrice] = useState("");
+  const [inputQty, setInputQty] = useState("");
   const dispatch = useDispatch();
   const bills = useSelector((state) => state.data.bill);
   const params = useParams();
@@ -21,6 +21,8 @@ const Bill = () => {
   // function
   const addProductHandler = () => {
     if (currentBill.pay) return;
+    setInputPrice("");
+    setInputQty("");
     dispatch(DataActions.createItem({ type: "bill", listId: params.id }));
     setIndexActive(0);
   };
@@ -30,7 +32,6 @@ const Bill = () => {
   };
 
   const inputChangeHandler = (itemId, item) => {
-    console.log(item, itemId);
     dispatch(
       DataActions.updateItem({
         type: "bill",
@@ -50,6 +51,25 @@ const Bill = () => {
       })
     );
   };
+
+  useEffect(() => {
+    for (let i = 0; i < currentBill.list.length; i++) {
+      const item = currentBill.list[i];
+      if (!item.title && !item.price && !item.quantity && indexActive !== i) {
+        dispatch(
+          DataActions.deleteItem({
+            type: "bill",
+            listId: params.id,
+            itemId: item.createdAt.toString(),
+          })
+        );
+        return;
+      }
+    }
+    if (indexActive < 0 || indexActive > currentBill.list.length) return;
+    setInputPrice(currentBill.list[indexActive].price.toString());
+    setInputQty(currentBill.list[indexActive].quantity.toString());
+  }, [indexActive]);
   if (!currentBill) return <div>Not have bill!</div>;
 
   return (
@@ -64,6 +84,7 @@ const Bill = () => {
               <div className="Product" key={product.updatedAt}>
                 <div className="wrap-left">
                   <input
+                    autoFocus
                     type="text"
                     placeholder="Title"
                     className="input-title"
@@ -79,15 +100,15 @@ const Bill = () => {
                   <div className="wrap-right-top">
                     <div className="wrap-info price">
                       <p className="price-title">P: </p>
-                      {console.log(Number(currentBill.list[i].price))}
                       <input
                         className="input-price"
-                        inputmode="decimal"
-                        value={(currentBill.list[i].price || "").toString()}
+                        inputMode="decimal"
+                        value={(inputPrice || "").toString()}
                         onChange={(e) => {
                           const value = e.target.value.replace(",", ".");
                           const regex = /^[0-9]*\.?[0-9]*$/;
                           if (regex.test(value)) {
+                            setInputPrice(e.target.value);
                             inputChangeHandler(product.createdAt, {
                               price: Number(value),
                             });
@@ -99,12 +120,13 @@ const Bill = () => {
                       <p className="quantity-title">Q: </p>
                       <input
                         className="input-quantity"
-                        inputmode="decimal"
-                        value={(currentBill.list[i].quantity || "").toString()}
+                        inputMode="decimal"
+                        value={(inputQty || "").toString()}
                         onChange={(e) => {
                           const value = e.target.value.replace(",", ".");
                           const regex = /^[0-9]*\.?[0-9]*$/;
                           if (regex.test(value)) {
+                            setInputQty(e.target.value);
                             inputChangeHandler(product.createdAt, {
                               quantity: Number(value),
                             });
@@ -116,8 +138,8 @@ const Bill = () => {
                       <p className="total-title">T: </p>
                       <p className="total-number">
                         {compactPrice(
-                          currentBill.list[i].quantity *
-                            currentBill.list[i].price
+                          (currentBill.list[i].quantity || 0) *
+                            (currentBill.list[i].price || 0)
                         )}
                       </p>
                     </div>

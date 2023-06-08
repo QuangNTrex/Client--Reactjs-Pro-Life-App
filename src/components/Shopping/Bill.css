@@ -36,7 +36,7 @@
   border: 1px solid rgba(0, 0, 0, 0.213);
 }
 .Bill .Product .input-title {
-  width: 50%;
+  width: 7rem;
 }
 .Bill .Product .input-price {
   width: 4rem;

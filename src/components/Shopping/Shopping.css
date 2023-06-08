@@ -1,3 +1,17 @@
+.Shopping {
+}
+.Shopping .btn-close-edit-mode {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  padding: 0.5rem 1.5rem;
+  border: 1px solid black;
+  top: 5rem;
+}
+.Shopping .btn-close-edit-mode p {
+  margin: 0;
+}
 .Shopping__btn-add-bill {
   display: flex;
   justify-content: flex-end;
@@ -28,15 +42,27 @@
   border: 1px solid black;
   padding: 0.5rem;
 }
+.Shopping__Lists .wrap .bill .wrap-left .title {
+  margin-bottom: 0.5rem;
+}
 .Shopping__Lists .wrap .bill .wrap-left .date {
   font-size: 10px;
   margin: 0;
+}
+.Shopping__Lists .wrap .bill .wrap-left .input-title {
+  margin-bottom: 0.5rem;
+  outline: 0;
+  border: 1px solid rgba(0, 0, 0, 0.49);
+  background-color: var(--primary-color);
+  font-size: calc(1.275rem + 0.3vw);
+  width: 15rem;
 }
 .Shopping__Lists .wrap .bill .wrap-right {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-end;
+  gap: 0.5rem;
 }
 .Shopping__Lists .wrap .bill .wrap-right .total-price p {
   margin: 0;
@@ -44,4 +70,13 @@
 .Shopping__Lists .wrap .bill .wrap-right .state-pay p {
   margin: 0;
   font-size: 13px;
+}
+.Shopping__Lists .wrap .bill .wrap-right .state-pay .trash {
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  padding: 2px 1.5rem;
+}
+.Shopping__Lists .wrap .bill .wrap-right .state-pay .trash i {
+  font-size: 14px;
 }

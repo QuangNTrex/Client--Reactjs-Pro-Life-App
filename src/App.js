@@ -11,6 +11,7 @@ import LendDetail from "./components/Lend/LendDetail";
 import Tasks from "./components/Tasks/Tasks";
 import Plans from "./components/Plans/Plans";
 import TaskItem from "./components/Tasks/TaskItem";
+import PlanItem from "./components/Plans/PlanItem";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/tasks" element={<Tasks />} />
           <Route path="/tasks/:id" element={<TaskItem />} />
           <Route path="/plans" element={<Plans />} />
+          <Route path="/plans/:id" element={<PlanItem />} />
         </Routes>
       </Layout>
     </div>

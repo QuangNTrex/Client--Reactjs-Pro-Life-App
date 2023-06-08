@@ -1,0 +1,57 @@
+.PlanItem input {
+  outline: 0;
+  border: 1px solid rgba(0, 0, 0, 0.281);
+  background-color: var(--primary-color);
+  font-size: 12px;
+  width: 9rem;
+}
+.PlanItem .btn-add-plan {
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+  border: 1px solid black;
+  margin-bottom: 1rem;
+}
+.PlanItem .list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.PlanItem .list .item {
+  padding: 0.5rem;
+  border: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+}
+.PlanItem .list .item .wrap-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.PlanItem .list .item .wrap-left .title {
+  font-size: 20px;
+}
+.PlanItem .list .item .wrap-left .input-title {
+  font-size: 20px;
+  width: 8rem;
+}
+.PlanItem .list .item .wrap-left .input-note {
+  width: 6rem;
+}
+.PlanItem .list .item .wrap-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+.PlanItem .list .item .wrap-right .done {
+  padding: 0.5rem;
+  border: 1px solid black;
+  width: 5rem;
+  display: flex;
+  justify-content: center;
+}
+.PlanItem .list .item > * > * {
+  display: flex;
+  gap: 0.5rem;
+}

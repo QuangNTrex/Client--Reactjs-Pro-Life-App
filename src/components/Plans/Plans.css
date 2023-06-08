@@ -1,0 +1,72 @@
+p {
+  margin: 0;
+  font-size: 12px;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
+}
+.Plans {
+}
+.Plans input {
+  outline: 0;
+  border: 1px solid rgba(0, 0, 0, 0.281);
+  background-color: var(--primary-color);
+  font-size: 12px;
+  width: 9rem;
+}
+.Plans .btn-close-edit-mode {
+  position: absolute;
+  top: 5rem;
+  left: 50%;
+  transform: translate(-50%, 0);
+  padding: 0.5rem;
+  border: 1px solid black;
+}
+.Plans .Plans__btn-add {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+.Plans .list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.Plans .list .plan {
+  border: 1px solid black;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+.Plans .list .plan .wrap-left {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.Plans .list .plan .wrap-left .title {
+  font-size: 20px;
+}
+.Plans .list .plan .wrap-left .input-title {
+  width: 7rem;
+  font-size: 20px;
+}
+.Plans .list .plan .wrap-left .note {
+  display: flex;
+  gap: 0.5rem;
+}
+.Plans .list .plan .wrap-left .input-note {
+  width: 5rem;
+}
+.Plans .list .plan .wrap-right {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  align-items: flex-end;
+}
+.Plans .list .plan .wrap-right > * {
+  display: flex;
+  gap: 0.5rem;
+}

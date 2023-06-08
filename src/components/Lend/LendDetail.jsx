@@ -3,29 +3,31 @@ import "./LendDetail.css";
 import { useDispatch, useSelector } from "react-redux";
 import { LendActions } from "../../store/lend";
 import { useEffect, useState } from "react";
+import { DataActions } from "../../store/data";
 
 const LendDetail = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const navigate = useNavigate();
-  const currentLend = useSelector((state) => state.lend.lends).filter(
+  const currentLend = useSelector((state) => state.data.lend).filter(
     (e) => e.createdAt.toString() === params.id
   )[0];
   const [indexActive, setIndexActive] = useState(-1);
   const addMountHandler = () => {
     if (currentLend.pay) return;
     setIndexActive(0);
-    dispatch(LendActions.addAmount({ lendId: params.id }));
+    dispatch(DataActions.createItem({ type: "lend", listId: params.id }));
   };
 
   useEffect(() => {
-    for (let i = 0; i < currentLend.amounts.length; i++) {
-      const { title, money, createdAt } = currentLend.amounts[i];
+    for (let i = 0; i < currentLend.list.length; i++) {
+      const { title, money, createdAt } = currentLend.list[i];
       if (!title && !money && indexActive !== i) {
         dispatch(
-          LendActions.deleteAmount({
-            lendId: params.id,
-            amountId: createdAt.toString(),
+          DataActions.deleteItem({
+            type: "lend",
+            listId: params.id,
+            itemId: createdAt.toString(),
           })
         );
         return;
@@ -39,8 +41,8 @@ const LendDetail = () => {
         <i className="bi bi-plus-lg"></i>
       </div>
       <div className="list">
-        {currentLend.amounts.length === 0 && <p>No have lend</p>}
-        {currentLend.amounts.map((e, i) => (
+        {currentLend.list.length === 0 && <p>No have lend</p>}
+        {currentLend.list.map((e, i) => (
           <div
             className="amount"
             key={e.createdAt.toString()}
@@ -53,14 +55,16 @@ const LendDetail = () => {
               {indexActive !== i && <p className="title">{e.title}</p>}
               {indexActive === i && (
                 <input
+                autoFocus
                   className="input-title"
                   defaultValue={e.title}
                   onChange={(ele) => {
                     dispatch(
-                      LendActions.updateAmount({
-                        lendId: params.id,
-                        amountId: e.createdAt.toString(),
-                        amount: { title: ele.target.value },
+                      DataActions.updateItem({
+                        type: "lend",
+                        listId: params.id,
+                        itemId: e.createdAt.toString(),
+                        item: { title: ele.target.value },
                       })
                     );
                   }}
@@ -80,10 +84,11 @@ const LendDetail = () => {
                   defaultValue={e.money.toString()}
                   onChange={(ele) => {
                     dispatch(
-                      LendActions.updateAmount({
-                        lendId: params.id,
-                        amountId: e.createdAt.toString(),
-                        amount: { money: Number(ele.target.value) },
+                      DataActions.updateItem({
+                        type: "lend",
+                        listId: params.id,
+                        itemId: e.createdAt.toString(),
+                        item: { money: Number(ele.target.value) },
                       })
                     );
                   }}
@@ -109,9 +114,10 @@ const LendDetail = () => {
             onClick={() => {
               setIndexActive(-1);
               dispatch(
-                LendActions.updateLend({
-                  lendId: params.id,
-                  lend: { pay: !currentLend.pay },
+                DataActions.updateList({
+                  type: "lend",
+                  listId: params.id,
+                  list: { pay: !currentLend.pay },
                 })
               );
             }}
