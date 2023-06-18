@@ -4,6 +4,7 @@ import Popup from "../../lib/Popup/Popup";
 import { useSelector } from "react-redux";
 import useManageList from "../../hook/use-manage-list";
 import { useNavigate } from "react-router-dom";
+import { slimName } from "../../utils/utils";
 
 const Plans = () => {
   const {
@@ -20,8 +21,10 @@ const Plans = () => {
     indexActive,
     editMode,
   } = useManageList("plan");
+
   const navigate = useNavigate();
   const plans = useSelector((state) => state.data.plan);
+
   return (
     <div className="Plans">
       {showPU && (
@@ -43,7 +46,7 @@ const Plans = () => {
         />
       )}
       <div className="Plans__btn-add">
-        <BTNAdd text="Add Task" onClick={showPUHandler} />
+        <BTNAdd text="Add Plan" onClick={showPUHandler} />
       </div>
       {editMode && (
         <div className="btn-close-edit-mode" onClick={offEditMode}>
@@ -69,10 +72,10 @@ const Plans = () => {
           >
             {indexActive !== i && (
               <div className="wrap-left">
-                <p className="title">{plan.title}</p>
+                <p className="title">{slimName(plan.title)}</p>
                 <div className="note">
                   <p>Note:</p>
-                  <p>{plan.note}</p>
+                  <p>{slimName(plan.note, 20)}</p>
                 </div>
               </div>
             )}

@@ -1,9 +1,10 @@
 import { useNavigate, useParams } from "react-router-dom";
 import "./LendDetail.css";
 import { useDispatch, useSelector } from "react-redux";
-import { LendActions } from "../../store/lend";
+// import { LendActions } from "../../store/lend";
 import { useEffect, useState } from "react";
 import { DataActions } from "../../store/data";
+import { slimName } from "../../utils/utils";
 
 const LendDetail = () => {
   const dispatch = useDispatch();
@@ -55,8 +56,9 @@ const LendDetail = () => {
               {indexActive !== i && <p className="title">{e.title}</p>}
               {indexActive === i && (
                 <input
-                autoFocus
+                  autoFocus
                   className="input-title"
+                  placeholder="Title"
                   defaultValue={e.title}
                   onChange={(ele) => {
                     dispatch(
@@ -101,7 +103,7 @@ const LendDetail = () => {
       </div>
       <div className="Lend__bottom">
         <div className="wrap-left">
-          <p className="full-name">{currentLend.fullName}</p>
+          <p className="full-name">{slimName(currentLend.fullName)}</p>
           <p>{currentLend.title}</p>
         </div>
         <div className="wrap-right">

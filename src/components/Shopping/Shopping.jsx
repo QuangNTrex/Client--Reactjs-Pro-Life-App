@@ -2,9 +2,11 @@ import { useRef, useState } from "react";
 import Popup from "../../lib/Popup/Popup";
 import "./Shopping.css";
 import { useDispatch, useSelector } from "react-redux";
-import { BillActions } from "../../store/bill";
+// import { BillActions } from "../../store/bill";
 import { useNavigate } from "react-router-dom";
 import { DataActions } from "../../store/data";
+// import useText from "../../hook/use-text";
+import { slimName } from "../../utils/utils";
 
 const getDay = (time) => {
   const currentDate = time ? new Date(time) : new Date();
@@ -51,7 +53,6 @@ const Shopping = () => {
   const upHandler = () => {
     clearTimeout(timeoutRef.current);
   };
-  console.log(editMode);
 
   return (
     <div className="Shopping">
@@ -80,7 +81,7 @@ const Shopping = () => {
           <div className="wrap">
             {bills.map((bill, i) => (
               <div
-                className="bill"
+                className={`bill ${bill.pay && "border-green"}`}
                 key={bill.createdAt.toString()}
                 onClick={() => {
                   if (!editMode) return navigate(`./${bill.createdAt}`);
@@ -90,11 +91,14 @@ const Shopping = () => {
                 onTouchEnd={upHandler}
                 onMouseDown={downHandler.bind(null, i)}
                 onMouseUp={upHandler}
+                onTouchMove={upHandler}
                 onContextMenu={(e) => e.preventDefault()}
               >
                 {indexActive !== i && (
                   <div className="wrap-left">
-                    <h4 className="title noselect">{bill.title}</h4>
+                    <h4 className="title noselect">
+                      {slimName(bill.title, 20)}
+                    </h4>
                     <p className="date noselect">{getDay(bill.createdAt)}</p>
                   </div>
                 )}

@@ -61,6 +61,7 @@ const PlanItem = () => {
                 <input
                   type="text"
                   autoFocus
+                  placeholder="Title"
                   className="input-title"
                   onChange={(e) => {
                     inputChangeHandler(item.createdAt, {
@@ -73,6 +74,7 @@ const PlanItem = () => {
                   <p>Note:</p>
                   <input
                     type="text"
+                    placeholder="Note"
                     className="input-note"
                     onChange={(e) => {
                       inputChangeHandler(item.createdAt, {

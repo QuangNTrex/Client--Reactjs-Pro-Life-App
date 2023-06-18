@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import BTNAdd from "../../lib/BTNAdd/BTNAdd";
 import "./Tasks.css";
-import { TaskActions } from "../../store/task";
+// import { TaskActions } from "../../store/task";
 import { useState } from "react";
 import Popup from "../../lib/Popup/Popup";
-import { checkBorder, checkDeadline, upFirstStr } from "../../utils/utils";
+import { checkBorder, slimName, upFirstStr } from "../../utils/utils";
 import { useNavigate } from "react-router-dom";
 import { DataActions } from "../../store/data";
 const listWeek = [
@@ -26,7 +26,7 @@ const Tasks = () => {
 
   const submitHandler = (data) => {
     const title = data.title;
-    const deadline = Date.parse(data.deadline);
+    const deadline = data.deadline;
     const repeat = data.repeat;
     dispatch(
       DataActions.createList({
@@ -39,9 +39,9 @@ const Tasks = () => {
   const inputChangeHandler = (listId, data) => {
     dispatch(DataActions.updateList({ type: "task", list: data, listId }));
   };
-  const deleteTaskHandler = (listId, title) => {
-    const prom = prompt(`Press "${title || ""}" to delete the task`);
-    if (prom === (title || ""))
+  const deleteTaskHandler = (listId) => {
+    const prom = prompt(`Press password to delete the task`);
+    if (prom === "quangdeptrai")
       dispatch(DataActions.deleteList({ type: "task", listId }));
   };
   return (
@@ -66,6 +66,7 @@ const Tasks = () => {
           ]}
         />
       )}
+
       <div className="btn-add-task">
         <BTNAdd
           text={editMode ? "Done!" : "Edit"}
@@ -83,6 +84,7 @@ const Tasks = () => {
           }}
         />
       </div>
+
       <div className="list">
         {tasks.map((e, i) => (
           <div
@@ -97,10 +99,13 @@ const Tasks = () => {
           >
             {indexActive !== i && (
               <div className="wrap-left">
-                <p className="title">{upFirstStr(e.title) || "Untitled"}</p>
+                <p className="title">
+                  {slimName(upFirstStr(e.title) || "Untitled")}
+                </p>
                 <div className="deadline">
                   <p className="">Deadline: </p>
                   <p className="deadline-time">
+                    {console.log(e.deadline)}
                     {new Date(e.deadline ? e.deadline : "").toLocaleString()}
                   </p>
                 </div>

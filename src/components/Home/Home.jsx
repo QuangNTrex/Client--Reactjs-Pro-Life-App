@@ -1,3 +1,4 @@
+import DashBoard from "./DashBoard/DashBoard";
 import GroupClassify from "./GroupClassify";
 import "./Home.css";
 
@@ -15,6 +16,7 @@ const Home = () => {
   return (
     <div className="Home">
       <div className="Home__classify">
+        <DashBoard />
         <GroupClassify list={typesFinance} header="Finance" />
         <GroupClassify list={typesTasks} header="Tasks" />
       </div>

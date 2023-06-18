@@ -2,6 +2,19 @@
   font-size: 12px;
   margin: 0;
 }
+.Lend input {
+  outline: 0;
+  border: 1px solid black;
+  background-color: var(--premary-color);
+}
+.Lend .close {
+  position: absolute;
+  top: 5rem;
+  left: 50%;
+  transform: translate(-50%, 0);
+  padding: 0.5rem;
+  border: 1px solid black;
+}
 .Lend__btn-add {
   display: flex;
   justify-content: flex-end;
@@ -21,6 +34,19 @@
 }
 .Lend__list .lend .fullName {
   font-size: 18px;
+}
+.Lend__list .lend .wrap-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.Lend__list .lend .wrap-left .input-name {
+  font-size: 18px;
+  width: 14rem;
+}
+.Lend__list .lend .wrap-left .input-estimate {
+  font-size: 12px;
+  width: 10rem;
 }
 .Lend__list .wrap-date {
   display: flex;

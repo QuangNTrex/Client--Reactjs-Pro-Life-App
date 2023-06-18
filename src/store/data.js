@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { HTTPPOST } from "../utils/http";
 
 const nameList = {
   bill: "bill",
@@ -6,6 +7,11 @@ const nameList = {
   task: "task",
   plan: "plan",
 };
+
+let timeout = {
+  bill: null,
+};
+
 const updateFn = {
   bill: (data) => {
     const bills = [...data];
@@ -117,7 +123,6 @@ const getInitItem = (type) => {
       createdAt: Date.now(),
       updatedAt: Date.now(),
       title: "",
-      estimateDate: NaN,
     };
   if (nameList.task === type)
     return {
@@ -164,9 +169,27 @@ const DataSlice = createSlice({
       const list = action.payload.list;
       for (let i = 0; i < state[type].length; i++) {
         if (state[type][i].createdAt.toString() === listId) {
-          state[type][i] = { ...state[type][i], ...list };
+          state[type][i] = {
+            ...state[type][i],
+            ...list,
+            updatedAt: Date.now(),
+          };
         }
       }
+      clearTimeout(timeout[type]);
+      console.log("in update");
+
+      timeout[type] = setTimeout(
+        ((data) => {
+          console.log(data);
+          console.log("update!");
+          HTTPPOST(`/data/updates`, { data, type })
+            .then((data) => console.log(data))
+            .catch((err) => console.log(err));
+        }).bind(null, JSON.parse(JSON.stringify(state[type]))),
+        5000
+      );
+      // chạy các hàm tính toán liên quan như tổng tiền
       state[type] = updateFn[type]([...state[type]]);
     },
 
@@ -199,11 +222,28 @@ const DataSlice = createSlice({
         if (e.createdAt.toString() === listId) {
           for (let i = 0; i < e.list.length; i++) {
             if (e.list[i].createdAt.toString() === itemId) {
-              e.list[i] = { ...e.list[i], ...item };
+              e.list[i] = { ...e.list[i], ...item, updatedAt: Date.now() };
+              e.updatedAt = Date.now();
             }
           }
         }
       });
+
+      // set timeout to sync data
+      clearTimeout(timeout[type]);
+      console.log("in update");
+
+      timeout[type] = setTimeout(
+        ((data) => {
+          console.log(data);
+          console.log("update!");
+          HTTPPOST(`/data/updates`, { data, type })
+            .then((data) => console.log(data))
+            .catch((err) => console.log(err));
+        }).bind(null, JSON.parse(JSON.stringify(state[type]))),
+        5000
+      );
+
       state[type] = updateFn[type](state[type]);
     },
 

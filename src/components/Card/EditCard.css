@@ -1,0 +1,38 @@
+.EditCard input {
+  outline: 0;
+  border: 1px solid rgba(0, 0, 0, 0.327);
+  background-color: var(--primary-color);
+  font-size: 12px;
+  width: 6rem;
+}
+.EditCard p {
+  margin: 0;
+}
+.EditCard .container {
+  padding: 0.5rem;
+  border: 1px solid rgb(0, 0, 0);
+  display: flex;
+  justify-content: space-between;
+}
+.EditCard .container > * {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: space-between;
+}
+.EditCard .container .wrap-right {
+  align-items: flex-end;
+}
+.EditCard .container .item {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.EditCard .container .item.trash {
+  margin-top: 0.5rem;
+  padding: 0 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.256);
+}
+.EditCard .container .item .title::after {
+  content: ":";
+}

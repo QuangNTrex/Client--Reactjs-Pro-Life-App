@@ -54,7 +54,9 @@ const Popup = (props) => {
                   placeholder={e.placeHolder}
                   type={e.type}
                   onChange={(v) => {
-                    data[e.title] = v.target.value;
+                    if (e.type === "datetime-local" || e.type === "date") {
+                      data[e.title] = Date.parse(v.target.value);
+                    } else data[e.title] = v.target.value;
                   }}
                 />
               </div>

@@ -1,0 +1,25 @@
+.Card p {
+  margin: 0;
+}
+.Card .container {
+  padding: 0.5rem;
+  border: 1px solid rgb(0, 0, 0);
+  display: flex;
+  justify-content: space-between;
+}
+.Card .container > * {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: space-between;
+}
+.Card .container .wrap-right {
+  align-items: flex-end;
+}
+.Card .container .item {
+  display: flex;
+  gap: 0.5rem;
+}
+.Card .container .item .title::after {
+  content: ":";
+}
